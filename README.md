@@ -1,3 +1,119 @@
-# FarmBlock
-Decentralized farmsteads Onchain. 
-This Idea is to pioneer a global economy centered on growing life with solar powered irrigation system. Super Foods like Quinoa, Millets, goji berries, golden berries, and others with negative carbon effect and great value to the campaign of ending global hunger will be prioritized.  Our Protocol will mint NFT representation of real Agro products everytime a new FarmBlock is created. This will bring life and real value to NFTs,  and help in building a sustainable and productive ecosystem for our community, while successfully combating drought challenges in farming. This idea will harness local communities to participate in this noble call to nature, as they get rewarded for tasks they successfully complete. FarmBlocks will be decentralized farmsteads and can be created in a proof of ownership model, where the bearer of a farm title deeds or ownership certificate will upload it with a geo-tag of its location, then a number of Guardians is required to verify the authenticity of the documents in real world before signing onchain to be validators and co-guardians of that Farmstead and FarmBlock.  Guardians, who are also validators can  create time-bound tasks with rewards, give yield reports, make proposals that manage strategies in the farmBlock portfolio, and share live casts in the FarmBlock.
+FarmBlock - Decentralized Sustainable Agriculture on Celo
+
+FarmBlock is a decentralized application (DApp) on Celo that empowers communities to combat global hunger and drought through sustainable agriculture. By leveraging blockchain technology, FarmBlock enables local farmers to create farmsteads (FarmBlocks), mint NFTs tied to real agro-products (e.g., quinoa, millets, goji berries), and trade yields transparently using stablecoins (cUSD, cKES, cEUR). Our mission is to build a global economy centered on financial inclusion, community governance, and agricultural sustainability.
+FarmBlock integrates with MiniPay for seamless stablecoin payments, Gardens V2 for decentralized governance, Mento for yield generation, thirdweb for NFT functionality, Warpcast for transparency, and MapBox for geotagging farm locations. This project was developed as part of the MiniPay hackathon to showcase how Web3 can drive social impact.
+Table of Contents
+	•	Features  
+	•	Architecture  
+	•	Prerequisites  
+	•	Installation  
+	•	Usage  
+	•	Smart Contracts  
+	•	Governance  
+	•	Integrations  
+	•	Contributing  
+	•	Roadmap  
+	•	License  
+	•	Contact  
+Features
+	•	Community-Driven Peer Bank: A multisig wallet (FarmBlock Safe) funds task rewards and yield trading, managed by Guardians through decentralized governance.  
+	•	TaskManager: Farmers and Guardians create, track, and complete tasks (e.g., planting, harvesting), with rewards distributed via Gardens V2 funding pools.  
+	•	NFT Store: Mint and trade NFTs tied to agro-products using thirdweb, with payments in Mento stablecoins (cUSD, cKES, cEUR).  
+	•	Yield Generation: Guardians deposit funds into Mento stablecoin yield pools to earn returns, with withdrawals approved via Gardens V2 signal pools.  
+	•	Transparency: Live updates on FarmBlock activities (e.g., task completions, yield reports) are shared via Warpcast.  
+	•	Geotagging: MapBox integration allows users to discover and visualize FarmBlock locations globally.  
+	•	Financial Inclusion: MiniPay enables unbanked farmers to pay for services (e.g., task rewards, NFT purchases) using stablecoins.  
+Architecture
+FarmBlock is built on Celo, leveraging the following components:
+	•	Frontend: A NextJS app (from the MiniPay template) for a mobile-friendly interface, compatible with Opera Mini.  
+	•	Smart Contracts:  
+	◦	FundingPool.sol: Manages task rewards (via Gardens V2).  
+	◦	FarmBlockYieldDepositor.sol: Handles deposits/withdrawals to Mento stablecoin yield pools.  
+	◦	NFT contracts (via thirdweb) for minting agro-product NFTs.  
+	•	Governance: Gardens V2’s Circles model, with funding and signal pools for task management and fund withdrawals.  
+	•	Integrations:  
+	◦	MiniPay: Stablecoin payments (cUSD, cKES, cEUR).  
+	◦	Mento Router: Swaps for yield pool deposits/withdrawals.  
+	◦	thirdweb: NFT minting and trading.  
+	◦	Warpcast: Transparency updates.  
+	◦	MapBox: Geotagging farm locations.  
+Prerequisites
+	•	Node.js: v20 or higher  
+	•	Git: v2.38 or higher  
+	•	Yarn: For package management  
+	•	MetaMask or MiniPay Wallet: For interacting with Celo  
+	•	Celo Testnet Funds: Get test tokens from the Celo Faucet for Alfajores testnet  
+	•	WalletConnect Cloud Project ID: For wallet connections (get from WalletConnect Cloud)  
+	•	MapBox Access Token: For geotagging (get from MapBox)  
+Installation
+Clone the Repository:   git clone https://github.com/your-username/farmblock-dapp.git
+cd farmblock-dapp
+	1	
+Install Dependencies:   yarn install
+	2	
+	3	Configure Environment Variables:  
+	◦	Smart Contracts:  
+Rename packages/hardhat/env.template to packages/hardhat/env and add your PRIVATE_KEY.   PRIVATE_KEY=your_private_key
+	•	
+	•	Frontend:  
+Rename packages/react-app/.env.template to packages/react-app/.env and add your WalletConnect Cloud Project ID and MapBox Access Token.   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
+NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
+	•	
+	4	Fund Your Wallet:  
+	◦	Ensure your wallet has test tokens for Celo Alfajores (from the Celo Faucet).  
+Usage
+	1	Deploy Smart Contracts:  
+Navigate to the Hardhat package:   cd packages/hardhat
+	•	
+Deploy the contracts to Celo Alfajores:   npx hardhat ignition deploy ./ignition/modules/FundingPool.js --network alfajores
+npx hardhat ignition deploy ./ignition/modules/FarmBlockYieldDepositor.js --network alfajores
+	•	
+	2	Start the Frontend:  
+Navigate to the React app package:   cd packages/react-app
+	•	
+Start the development server:   yarn dev
+	•	
+	•	Open http://localhost:3000 in a browser (preferably Opera Mini for MiniPay compatibility).  
+	3	Interact with FarmBlock:  
+	◦	Connect your MiniPay wallet to the app.  
+	◦	Create a FarmBlock community (via Gardens V2).  
+	◦	Use the TaskManager to create and complete tasks.  
+	◦	Mint and trade agro-product NFTs in the NFT store.  
+	◦	Deposit funds into Mento yield pools and withdraw based on community approval.  
+	◦	Share updates via Warpcast and explore FarmBlock locations with MapBox.  
+Smart Contracts
+	•	FundingPool.sol: Manages task rewards, restricted to Mento stablecoins (cUSD, cKES, cEUR).  
+	◦	Deployed at: [TBD after deployment]  
+	•	FarmBlockYieldDepositor.sol: Handles deposits and withdrawals to/from Mento yield pools, triggered by Gardens V2 signal pool approvals.  
+	◦	Deployed at: [TBD after deployment]  
+	•	NFT Contract: Deployed via thirdweb for minting agro-product NFTs.  
+	◦	Deployed at: [TBD after deployment]  
+Governance
+FarmBlock uses Gardens V2’s Circles governance model:
+	•	Values: Sustainability, transparency, community empowerment.  
+	•	Membership: Open to farmers, Guardians, and NFT holders who register onchain (via Celo SocialConnect) and verify humanity (via Self).  
+	•	Council: Each FarmBlock forms a Circle with a Council of Guardians, elected by NFT holders, to manage tasks and funds.  
+	•	Delegation: Guardians can delegate tasks to community members.  
+	•	Lazy Consensus: Proposals (e.g., fund withdrawals) are approved unless objected to within a set period.  
+Signal Pools: Used to approve withdrawals from yield pools, ensuring community consensus.
+Integrations
+	•	MiniPay: Enables stablecoin payments (cUSD, cKES, cEUR) for task rewards and NFT purchases.  
+	•	Gardens V2: Provides modular governance pools for task management and fund allocation.  
+	•	Mento Router: Facilitates swaps for yield pool deposits/withdrawals (e.g., cUSD â†’ cKES).  
+	•	thirdweb: Powers the NFT store for minting and trading agro-product NFTs.  
+	•	Warpcast: Shares live updates on FarmBlock activities for transparency.  
+	•	MapBox: Geotags FarmBlock locations for discovery and visualization.  
+Contributing
+We welcome contributions from the community! To get started:
+	1	Fork the repository.  
+	2	Create a new branch (git checkout -b feature/your-feature).  
+	3	Make your changes and commit (git commit -m "Add your feature").  
+	4	Push to your fork (git push origin feature/your-feature).  
+	5	Open a Pull Request with a detailed description of your changes.  
+Suggested Contributions
+	•	Add unit tests for smart contracts (FundingPool.sol, FarmBlockYieldDepositor.sol).  
+	•	Optimize MapBox performance for mobile users.  
+	•	Enhance Warpcast integration with real-time notifications.  
+	•	Improve UI/UX for the TaskManager and NFT store.  
+See CONTRIBUTING.md for more details.
+Roadmap
